@@ -1,0 +1,78 @@
+﻿<Window x:Class="PerspectiveRestorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PerspectiveRestorer"
+        mc:Ignorable="d"
+        Title="PerspectiveRestorer" Height="800" Width="1200"
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" PreviewMouseLeftButtonDown="Window_MouseDown">
+    <Window.Resources>
+        <Style TargetType = "CheckBox">
+            <Setter Property = "Margin" Value = "5,0,0,0"/>
+            <Setter Property = "Padding" Value = "-5,0,0,0"/>
+        </Style>
+        <Style x:Key = "paramTextBlock" TargetType = "TextBlock">
+            <Setter Property = "Height" Value = "Auto"/>
+            <Setter Property = "Margin" Value = "5"/>
+            <Setter Property = "HorizontalAlignment" Value = "Right"/>
+        </Style>
+        <Style x:Key = "paramTextBox" TargetType = "TextBox">
+            <Setter Property = "Height" Value = "Auto"/>
+            <Setter Property = "MinWidth" Value = "50"/>
+            <Setter Property = "Margin" Value = "5"/>
+            <Setter Property = "HorizontalAlignment" Value = "Left"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="569*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel x:Name="paramPanel" HorizontalAlignment="Left" Margin="5,5,5,5" LastChildFill="False"/>
+            <Grid Grid.Column="1" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <WrapPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Image:"/>
+                    <TextBox x:Name="imagePath" MinWidth="80" Margin="5, 0, 5, 0"
+                             IsReadOnly="True" Foreground="Gray"/>
+                    <Button Content="Choose..." Click="OpenImageButton_Click"/>
+                    <TextBlock x:Name="scaleTextBlock" Text="100%" Margin="10,0,0,0"/>
+                    <CheckBox x:Name="planeCheckBox" Content="plane details" Click="canvasCheckBox_Changed"/>
+                    <CheckBox x:Name="axesCheckBox" Content="axes" Click="canvasCheckBox_Changed"/>
+                    <CheckBox x:Name="zCheckBox" Content="z lines" Click="canvasCheckBox_Changed"/>
+
+                    <TextBlock x:Name="miniLog" Text="" Margin="10,0,0,0"/>
+                </WrapPanel>
+
+                <Image x:Name="scopedImage" Grid.Row="1"
+                        MouseWheel="scopedImage_MouseWheel" MouseMove="scopedImage_MouseMove"
+                        MouseLeftButtonDown="scopedImage_MouseLeftButtonDown" MouseLeftButtonUp="scopedImage_MouseLeftButtonUp" MouseRightButtonDown="scopedImage_MouseRightButtonDown"
+                        Stretch="Uniform" HorizontalAlignment="Stretch" StretchDirection="Both" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                <Canvas x:Name="canvas" Grid.Row="1" Background="Transparent" ClipToBounds="True"
+                        MouseWheel="scopedImage_MouseWheel" MouseMove="scopedImage_MouseMove"
+                        MouseLeftButtonDown="scopedImage_MouseLeftButtonDown" MouseLeftButtonUp="scopedImage_MouseLeftButtonUp" MouseRightButtonDown="scopedImage_MouseRightButtonDown"
+                        Width="{Binding Path=ActualWidth, ElementName=scopedImage}" Height="{Binding Path=ActualHeight, ElementName=scopedImage}">
+                </Canvas>
+            </Grid>
+        </Grid>
+
+        <StackPanel x:Name="resultPanel" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2"/>
+
+        <TextBox x:Name="minecraftCommand" Grid.Row="2" Grid.ColumnSpan="2" Padding="5"
+                 Text="/execute in overworld? run tp @s &lt;x> &lt;y> &lt;z> &lt;yaw> &lt;pitch>" FontFamily="Calibri"/>
+    </Grid>
+</Window>
