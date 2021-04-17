@@ -76,7 +76,7 @@ namespace PerspectiveRestorer
             double a = pm.GetParam("1->2 length")[0, 0] / 2;
             double b = pm.GetParam("1->3 length")[0, 0] / 2;
             double width = info.ImageOrig.PixelWidth, height = info.ImageOrig.PixelHeight;
-            double reToImg = width / CameraParameters.GetFovWidth(pm.GetParam("vert_fov")[0, 0]);
+            double reToImg = width / CameraParameters.GetFovWidth(pm.GetParam("hor_fov")[0, 0]);
             double reToCanvasX = canvas.ActualWidth / info.ImageCropped.PixelWidth;
             double reToCanvasY = canvas.ActualHeight / info.ImageCropped.PixelHeight;
             if (zLinesFlag)
@@ -102,6 +102,9 @@ namespace PerspectiveRestorer
                     basePoint = (transMatrix * Vector<double>.Build.DenseOfArray(basePoint)).ToArray();
                     zPoint = (transMatrix * Vector<double>.Build.DenseOfArray(zPoint)).ToArray();
                     PointD[] proj = PerspectiveInversion.Transform.Straight(new double[][] { basePoint, zPoint }, solver.Solution);
+                    if (proj[0].Distance(proj[1]) < 0.01)
+                        continue;
+
                     for (int j = 0; j < 2; j++)
                     {
                         proj[j] = new PointD(width / 2 + reToImg * proj[j].X, height / 2 + reToImg * proj[j].Y);

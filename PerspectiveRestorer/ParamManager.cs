@@ -22,7 +22,7 @@ namespace PerspectiveRestorer
 
         public void Init()
         {
-            AddParam("vert_fov", 70);
+            AddParam("hor_fov", 70);
             AddParam("1", new double[,] { { 238.5 }, { 587.5 } }, new string[] { "x", "y" });
             AddParam("2", new double[,] { { 422.5 }, { 505 } }, new string[] { "x", "y" });
             AddParam("3", new double[,] { { 152 }, { 345.4 } }, new string[] { "x", "y" });

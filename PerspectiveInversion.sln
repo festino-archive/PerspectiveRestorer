@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerspectiveInversion", "PerspectiveInversion\PerspectiveInversion.csproj", "{836C0F19-5CD7-417A-87C1-5125783B483C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerspectiveRestorer", "PerspectiveRestorer\PerspectiveRestorer.csproj", "{0B2E5962-E04F-4471-8B98-0FCEC9706B77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{836C0F19-5CD7-417A-87C1-5125783B483C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836C0F19-5CD7-417A-87C1-5125783B483C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{836C0F19-5CD7-417A-87C1-5125783B483C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{836C0F19-5CD7-417A-87C1-5125783B483C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B2E5962-E04F-4471-8B98-0FCEC9706B77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B2E5962-E04F-4471-8B98-0FCEC9706B77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B2E5962-E04F-4471-8B98-0FCEC9706B77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B2E5962-E04F-4471-8B98-0FCEC9706B77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F9B8B46-AFAE-4472-B0D5-86CF8BE39723}
+	EndGlobalSection
+EndGlobal

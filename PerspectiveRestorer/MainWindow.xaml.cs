@@ -82,7 +82,7 @@ namespace PerspectiveRestorer
                     initPoints[i] = (transMatrix * Vector<double>.Build.DenseOfArray(initPoints[i])).ToArray();
                 PointD[] testPoints = PerspectiveInversion.Transform.Straight(initPoints, solver.Solution);
                 double width = ImageOrig.PixelWidth, height = ImageOrig.PixelHeight;
-                double reToImg = width / CameraParameters.GetFovWidth(paramManager.GetParam("vert_fov")[0, 0]);
+                double reToImg = width / CameraParameters.GetFovWidth(paramManager.GetParam("hor_fov")[0, 0]);
                 for (int i = 0; i < testPoints.Length; i++)
                     testPoints[i] = new PointD(width / 2 + reToImg * testPoints[i].X, height / 2 + reToImg * testPoints[i].Y);
 
@@ -96,9 +96,9 @@ namespace PerspectiveRestorer
                 distance = Math.Sqrt(distance);
 
                 if (distance > 0.001)
-                    miniLog.Text = "badness " + distance.ToString();
-                //else
-                //    miniLog.Text = "";
+                    miniLog.Text = "bad res: " + distance.ToString();
+                else
+                    miniLog.Text = "";
             }
             cropInfo = new CropInfo(Scale, ScaleFactor, minCorner, ImageOrig, ImageCropped);
             drawer?.Redraw(cropInfo,
@@ -263,16 +263,6 @@ namespace PerspectiveRestorer
             return -1;
         }
 
-        private void canvasCheckBox_Changed(object sender, RoutedEventArgs args)
-        {
-            Redraw();
-        }
-
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Redraw();
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!(e.OriginalSource is Visual))
@@ -293,6 +283,21 @@ namespace PerspectiveRestorer
             SelectedPoint = point;
             if (SelectedPoint >= 0)
                 paramManager.SetSelection((SelectedPoint + 1).ToString(), true);
+            Redraw();
+        }
+
+        private void canvasCheckBox_Changed(object sender, RoutedEventArgs args)
+        {
+            Redraw();
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Redraw();
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
             Redraw();
         }
     }

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PerspectiveRestorer"
         mc:Ignorable="d"
         Title="PerspectiveRestorer" Height="800" Width="1200"
-        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" PreviewMouseLeftButtonDown="Window_MouseDown">
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged"
+        PreviewMouseLeftButtonDown="Window_MouseDown">
     <Window.Resources>
         <Style TargetType = "CheckBox">
             <Setter Property = "Margin" Value = "5,0,0,0"/>

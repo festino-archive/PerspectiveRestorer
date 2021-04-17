@@ -32,6 +32,7 @@ namespace PerspectiveRestorer
             MinecraftCommand = minecraftCommand;
         }
 
+        //true if 1,4 and 2,3 intersects and points have some distance
         private bool CheckPoints()
         {
             ImagePoints = new PointD[4];
@@ -40,10 +41,9 @@ namespace PerspectiveRestorer
                 double[,] point = pm.GetParam(i.ToString());
                 ImagePoints[i - 1] = new PointD(point[0, 0], point[1, 0]);
             }
-            double fov = pm.GetParam("vert_fov")[0, 0];
+            double fov = pm.GetParam("hor_fov")[0, 0];
             if (fov < 1 || 170 < fov)
                 return false;
-            //true if 1,4 and 2,3 intersects and points have some distance
 
             for (int i = 0; i < 4; i++)
                 for (int j = i + 1; j < 4; j++)
@@ -86,7 +86,7 @@ namespace PerspectiveRestorer
             double b = pm.GetParam("1->3 length")[0, 0] / 2;
             PointD[] zPoints = new PointD[4];
             double width = ImageOrig.PixelWidth, height = ImageOrig.PixelHeight;
-            double norm = CameraParameters.GetFovWidth(pm.GetParam("vert_fov")[0, 0]) / width;
+            double norm = CameraParameters.GetFovWidth(pm.GetParam("hor_fov")[0, 0]) / width;
             for (int i = 0; i < 4; i++)
             {
                 double zWidth = norm * (ImagePoints[i].X - width / 2);
